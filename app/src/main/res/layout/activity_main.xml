@@ -1,51 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="100"
-    tools:context=".MainActivity"/>
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    tools:context=".MainActivity"
+    android:orientation="horizontal">
 
-    <Button android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SEARCH" />
+        android:text="search" />
+
+    <EditText
+        android:id="@+id/month"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/year"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/holiday"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="292dp" />
-
-    <EditText
-        android:id="@+id/year"
-        android:layout_width="54dp"
-        android:layout_height="44dp"
-        android:ems="10"
-        android:inputType="numberSigned"
-        tools:layout_editor_absoluteX="284dp"
-        tools:layout_editor_absoluteY="54dp" />
-
-    <EditText
-        android:id="@+id/date"
-        android:layout_width="62dp"
-        android:layout_height="47dp"
-        android:ems="10"
-        android:inputType="numberSigned"
-        tools:layout_editor_absoluteX="200dp"
-        tools:layout_editor_absoluteY="50dp" />
-
-    <EditText
-        android:id="@+id/month"
-        android:layout_width="62dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:inputType="numberSigned"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="54dp" />
-
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:text="holiday information" />
+</LinearLayout>
