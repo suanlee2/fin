@@ -1,38 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    tools:context=".MainActivity"
-    android:orientation="horizontal">
+    tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="search" />
 
     <EditText
         android:id="@+id/month"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="no"
+        android:inputType=""
+        app:layout_constraintBaseline_toBaselineOf="@+id/year"
+        app:layout_constraintEnd_toStartOf="@+id/year"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/year"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/search"
+        app:layout_constraintEnd_toStartOf="@+id/date"
+        app:layout_constraintStart_toEndOf="@+id/month" />
 
     <EditText
         android:id="@+id/date"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType=""
+        app:layout_constraintBaseline_toBaselineOf="@+id/year"
+        app:layout_constraintEnd_toStartOf="@+id/Instruction"
+        app:layout_constraintStart_toEndOf="@+id/year" />
+
+    <TextView
+        android:id="@+id/Instruction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:text="@string/month_year_date"
+        app:layout_constraintBaseline_toBaselineOf="@+id/date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/date" />
+
+
+    <Button
+        android:id="@+id/search"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:background="@color/colorAccent"
+        android:text="@android:string/search_go"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:visibility="visible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/holiday"
+        app:layout_constraintEnd_toStartOf="@+id/holiday"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/search"
+        app:layout_constraintEnd_toEndOf="@+id/search"
+        app:layout_constraintStart_toEndOf="@+id/search"
+        app:layout_constraintTop_toTopOf="@+id/search" />
 
     <TextView
         android:id="@+id/holiday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="holiday information" />
-</LinearLayout>
+        android:layout_marginTop="91dp"
+        android:text="holiday information"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/search"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

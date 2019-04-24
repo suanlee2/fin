@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">final</string>
+    <string name="month_year_date">month/year/date</string>
 </resources>
