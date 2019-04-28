@@ -3,6 +3,7 @@ package com.example.afinal;
 
 import com.example.lib.MyClass;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
@@ -19,33 +20,36 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class MainActivity extends AppCompatActivity {
     private static RequestQueue requestQueue;
+    TextView result = (TextView)findViewById(R.id.holiday);
     String a = "";
     String API_KEY = "54d59df2-06df-4fef-b91e-ebc272641061";
     private static final String TAG = "fin:Main";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestQueue = Volley.newRequestQueue(this);
+        //requestQueue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_main);
-
-        final Button search = findViewById(R.id.search);
-        search.setOnClickListener(new View.OnClickListener() {
+        EditText year = (EditText)findViewById(R.id.year);
+        EditText date = (EditText)findViewById(R.id.date);
+        EditText month = (EditText)findViewById(R.id.month);
+        Button search = findViewById(R.id.search);
+        find();
+        /*search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final EditText year = (EditText)findViewById(R.id.year);
-                final EditText date = (EditText)findViewById(R.id.date);
-                final EditText month = (EditText)findViewById(R.id.month);
-                final TextView holiday = (TextView)findViewById(R.id.holiday);
+
 
                 Log.d(TAG, "check");
-                a = Uri.parse("https://holidayapi.com/v1/holidays?")
+                a = Uri.parse("https://holidayapi.com/v1/holidays?key=b7bcc8be-0de4-4d4d-b540-b859755cf263&country=US")
                         .buildUpon()
                         .appendQueryParameter("key", API_KEY)
                         //.appendQueryParameter("country", country.getT)
@@ -55,12 +59,34 @@ public class MainActivity extends AppCompatActivity {
                         .build()
                         .toString();
                 startAPICall();
-                holiday.setText(a);
+            }
+        });*/
+    }
+    public void find() {
+        String url = "https://holidayapi.com/v1/holidays?key=b7bcc8be-0de4-4d4d-b540-b859755cf263&country=US";
+        JsonObjectRequest j = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String tmp = response.getString("name");
+                    JSONArray array = response.getJSONArray("holidays");
+                    JSONObject name = array.getJSONObject(0);
+                    String country = name.getString("name");
+                    result.setText(country);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
             }
         });
+        RequestQueue que = Volley.newRequestQueue(this);
+        que.add(j);
     }
-    protected
-    void startAPICall() {
+    /*void startAPICall() {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
@@ -69,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(final JSONObject response) {
-                            apiCallDone(response);
+                            set(response.toString());
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -82,8 +108,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }*/
+    protected void set(String input) {
+        //TextView result = findViewById(R.id.holiday);
+        result.setText(MyClass.holiday(input));
+        result.setTextColor(Color.BLUE);
     }
-
     /**
      * Handle the response from our IP geolocation API.
      *
