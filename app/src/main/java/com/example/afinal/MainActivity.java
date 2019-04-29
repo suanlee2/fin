@@ -29,7 +29,11 @@ import org.json.JSONArray;
 
 public class MainActivity extends AppCompatActivity {
     private static RequestQueue requestQueue;
-    TextView result = (TextView)findViewById(R.id.holiday);
+    private TextView result;
+    private EditText year;
+    private EditText date;
+    private EditText month;
+    private Button search;
     String a = "";
     String API_KEY = "54d59df2-06df-4fef-b91e-ebc272641061";
     private static final String TAG = "fin:Main";
@@ -38,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //requestQueue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_main);
-        EditText year = (EditText)findViewById(R.id.year);
-        EditText date = (EditText)findViewById(R.id.date);
-        EditText month = (EditText)findViewById(R.id.month);
-        Button search = findViewById(R.id.search);
-        find();
-        /*search.setOnClickListener(new View.OnClickListener() {
+        result = (TextView)findViewById(R.id.holiday);
+        year = (EditText)findViewById(R.id.year);
+        date = (EditText)findViewById(R.id.date);
+        month = (EditText)findViewById(R.id.month);
+        search = findViewById(R.id.search);
+        //find();
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -58,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
                         .appendQueryParameter("date", date.getText().toString())
                         .build()
                         .toString();
-                startAPICall();
+                find();
             }
-        });*/
+        });
     }
     public void find() {
         String url = "https://holidayapi.com/v1/holidays?key=b7bcc8be-0de4-4d4d-b540-b859755cf263&country=US";
@@ -70,9 +75,14 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String tmp = response.getString("name");
                     JSONArray array = response.getJSONArray("holidays");
-                    JSONObject name = array.getJSONObject(0);
-                    String country = name.getString("name");
-                    result.setText(country);
+                    if (array.length() != 0) {
+                        JSONObject name = array.getJSONObject(0);
+                        String country = name.getString("name");
+                        result.setText(country);
+                    } else {
+                        result.setText("Not a holiday");
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
