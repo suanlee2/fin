@@ -51,10 +51,8 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Log.d(TAG, "check");
-                a = Uri.parse("https://holidayapi.com/v1/holidays?key=b7bcc8be-0de4-4d4d-b540-b859755cf263&country=US")
+                a = Uri.parse("https://holidayapi.com/v1/holidays?key=54d59df2-06df-4fef-b91e-ebc272641061&country=US&year=2018")
                         .buildUpon()
                         .appendQueryParameter("key", API_KEY)
                         //.appendQueryParameter("country", country.getT)
@@ -64,21 +62,29 @@ public class MainActivity extends AppCompatActivity {
                         .build()
                         .toString();
                 find();
+
             }
         });
     }
     public void find() {
-        String url = "https://holidayapi.com/v1/holidays?key=b7bcc8be-0de4-4d4d-b540-b859755cf263&country=US";
+        String url = "https://holidayapi.com/v1/holidays?key=54d59df2-06df-4fef-b91e-ebc272641061&country=US&year=2018";
         JsonObjectRequest j = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     String tmp = response.getString("name");
+                    String yy = year.getText().toString();
+                    String mm = month.getText().toString();
+                    String dd = date.getText().toString();
+                    String input = yy + "-" + mm + "-" + dd;
                     JSONArray array = response.getJSONArray("holidays");
                     if (array.length() != 0) {
-                        JSONObject name = array.getJSONObject(0);
-                        String country = name.getString("name");
-                        result.setText(country);
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject name = array.getJSONObject(i);
+                            if (name.getString("date").equals(input)) {
+                                result.setText(name.getString("name"));
+                            }
+                        }
                     } else {
                         result.setText("Not a holiday");
                     }
