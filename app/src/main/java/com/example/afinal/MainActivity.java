@@ -65,14 +65,20 @@ public class MainActivity extends AppCompatActivity {
                     String mm = month.getText().toString();
                     String dd = date.getText().toString();
                     String input = yy + "-" + mm + "-" + dd;
+                    boolean x = false;
                     JSONArray array = response.getJSONArray("holidays");
                     if (array.length() != 0) {
                         for (int i = 0; i < array.length(); i++) {
                             JSONObject name = array.getJSONObject(i);
                             if (name.getString("date").equals(input)) {
                                 result.setText(name.getString("name"));
+                                x = true;
                             }
                         }
+                        if (!x) {
+                            result.setText("Ooop! Not Holiday!");
+                        }
+
                     }
                     //result.setText("Not a holiday");
                 } catch (JSONException e) {

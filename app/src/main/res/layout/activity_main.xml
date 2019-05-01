@@ -89,7 +89,7 @@
             android:layout_marginEnd="91dp"
             android:layout_marginRight="91dp"
             android:layout_marginBottom="526dp"
-            android:text="country                  month              date"
+            android:text="country                  month                           date"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
