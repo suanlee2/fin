@@ -30,20 +30,16 @@ public class MainActivity extends AppCompatActivity {
     private EditText date;
     private EditText month;
     private Button search;
-    String a = "";
-    String API_KEY = "54d59df2-06df-4fef-b91e-ebc272641061";
     private static final String TAG = "fin:Main";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestQueue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_main);
         result = (TextView)findViewById(R.id.holiday);
         country = (EditText) findViewById(R.id.country);
         date = (EditText)findViewById(R.id.date);
         month = (EditText)findViewById(R.id.month);
         search = findViewById(R.id.search);
-        //find();
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         String two = country.getText().toString();
         String three = "&year=2018";
         String url = one + two + three;
-        //String y = "https://holidayapi.com/v1/holidays?key=54d59df2-06df-4fef-b91e-ebc272641061&country=US&year=2018";
         JsonObjectRequest j = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -80,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                     }
-                    //result.setText("Not a holiday");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -93,19 +87,5 @@ public class MainActivity extends AppCompatActivity {
         });
         RequestQueue que = Volley.newRequestQueue(this);
         que.add(j);
-    }
-    /**
-     * Handle the response from our IP geolocation API.
-     *
-     * @param response response from our IP geolocation API.
-     */
-    void apiCallDone(final JSONObject response) {
-        MyClass.holiday("");
-        try {
-
-            Log.d(TAG, response.toString(2));
-            // Example of how to pull a field off the returned JSON object
-            Log.i(TAG, response.get("name").toString());
-        } catch (JSONException ignored) { }
     }
 }
