@@ -9,77 +9,143 @@
 
 
     <EditText
-        android:id="@+id/month"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:autofillHints="no"
-        android:inputType=""
-        app:layout_constraintBaseline_toBaselineOf="@+id/year"
-        app:layout_constraintEnd_toStartOf="@+id/year"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/year"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/search"
-        app:layout_constraintEnd_toStartOf="@+id/date"
-        app:layout_constraintStart_toEndOf="@+id/month" />
-
-    <EditText
         android:id="@+id/date"
-        android:layout_width="0dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
         android:importantForAutofill="no"
         android:inputType=""
-        app:layout_constraintBaseline_toBaselineOf="@+id/year"
-        app:layout_constraintEnd_toStartOf="@+id/Instruction"
-        app:layout_constraintStart_toEndOf="@+id/year" />
-
-    <TextView
-        android:id="@+id/Instruction"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="17dp"
-        android:layout_marginRight="17dp"
-        android:text="@string/month_year_date"
-        app:layout_constraintBaseline_toBaselineOf="@+id/date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/date" />
-
-
-    <Button
-        android:id="@+id/search"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="49dp"
-        android:background="@color/colorAccent"
-        android:text="@android:string/search_go"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:visibility="visible"
-        app:layout_constraintBaseline_toBaselineOf="@+id/holiday"
-        app:layout_constraintEnd_toStartOf="@+id/holiday"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Space
-        android:id="@+id/space"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/search"
-        app:layout_constraintEnd_toEndOf="@+id/search"
-        app:layout_constraintStart_toEndOf="@+id/search"
-        app:layout_constraintTop_toTopOf="@+id/search" />
-
-    <TextView
-        android:id="@+id/holiday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="91dp"
-        android:text="holiday information"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/search"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="279dp">
+
+        <EditText
+            android:id="@+id/country"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:autofillHints="no"
+            android:inputType=""
+            app:layout_constraintEnd_toStartOf="@+id/month"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/month"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="169dp"
+            android:layout_marginLeft="169dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:inputType="text"
+            app:layout_constraintEnd_toStartOf="@+id/date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="272dp">
+
+        <TextView
+            android:id="@+id/Instruction"
+            android:layout_width="297dp"
+            android:layout_height="77dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="156dp"
+            android:layout_marginEnd="91dp"
+            android:layout_marginRight="91dp"
+            android:layout_marginBottom="526dp"
+            android:text="country                  month              date"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/holiday"
+            android:layout_width="299dp"
+            android:layout_height="233dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="321dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginRight="56dp"
+            android:layout_marginBottom="177dp"
+            android:text="holiday information"
+            android:textSize="34dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <Button
+            android:id="@+id/search"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="148dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="129dp"
+            android:layout_marginLeft="129dp"
+            android:layout_marginTop="219dp"
+            android:layout_marginEnd="134dp"
+            android:layout_marginRight="134dp"
+            android:background="@color/colorAccent"
+            android:text="@android:string/search_go"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

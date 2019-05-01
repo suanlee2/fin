@@ -3,9 +3,6 @@ package com.example.afinal;
 
 import com.example.lib.MyClass;
 
-import android.graphics.Color;
-import android.net.Uri;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +17,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonArray;
 
 
 import org.json.JSONException;
@@ -30,7 +26,7 @@ import org.json.JSONArray;
 public class MainActivity extends AppCompatActivity {
     private static RequestQueue requestQueue;
     private TextView result;
-    private EditText year;
+    private EditText country;
     private EditText date;
     private EditText month;
     private Button search;
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         //requestQueue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_main);
         result = (TextView)findViewById(R.id.holiday);
-        year = (EditText)findViewById(R.id.year);
+        country = (EditText) findViewById(R.id.country);
         date = (EditText)findViewById(R.id.date);
         month = (EditText)findViewById(R.id.month);
         search = findViewById(R.id.search);
@@ -51,29 +47,21 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "check");
-                a = Uri.parse("https://holidayapi.com/v1/holidays?key=54d59df2-06df-4fef-b91e-ebc272641061&country=US&year=2018")
-                        .buildUpon()
-                        .appendQueryParameter("key", API_KEY)
-                        //.appendQueryParameter("country", country.getT)
-                        .appendQueryParameter("year", year.getText().toString())
-                        .appendQueryParameter("month", month.getText().toString())
-                        .appendQueryParameter("date", date.getText().toString())
-                        .build()
-                        .toString();
                 find();
-
             }
         });
     }
     public void find() {
-        String url = "https://holidayapi.com/v1/holidays?key=54d59df2-06df-4fef-b91e-ebc272641061&country=US&year=2018";
+        String one = "https://holidayapi.com/v1/holidays?key=54d59df2-06df-4fef-b91e-ebc272641061&country=";
+        String two = country.getText().toString();
+        String three = "&year=2018";
+        String url = one + two + three;
+        //String y = "https://holidayapi.com/v1/holidays?key=54d59df2-06df-4fef-b91e-ebc272641061&country=US&year=2018";
         JsonObjectRequest j = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    String tmp = response.getString("name");
-                    String yy = year.getText().toString();
+                    String yy = "2018";
                     String mm = month.getText().toString();
                     String dd = date.getText().toString();
                     String input = yy + "-" + mm + "-" + dd;
@@ -85,10 +73,8 @@ public class MainActivity extends AppCompatActivity {
                                 result.setText(name.getString("name"));
                             }
                         }
-                    } else {
-                        result.setText("Not a holiday");
                     }
-
+                    //result.setText("Not a holiday");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -96,39 +82,11 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                System.out.println(error);
             }
         });
         RequestQueue que = Volley.newRequestQueue(this);
         que.add(j);
-    }
-    /*void startAPICall() {
-        try {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                    Request.Method.GET,
-                    "https://holidayapi.com/v1/holidays",
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(final JSONObject response) {
-                            set(response.toString());
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(final VolleyError error) {
-                    Log.e(TAG, error.toString());
-                }
-            });
-            jsonObjectRequest.setShouldCache(false);
-            requestQueue.add(jsonObjectRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
-    protected void set(String input) {
-        //TextView result = findViewById(R.id.holiday);
-        result.setText(MyClass.holiday(input));
-        result.setTextColor(Color.BLUE);
     }
     /**
      * Handle the response from our IP geolocation API.
